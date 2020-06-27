@@ -81,16 +81,11 @@ for stag in bs_info.find_all('span'):
             film_type = stag.parent.text.strip().split(' ')[-1]
 
         if stag.get('class')[0] == 'hover-tag' and stag.text == '上映时间:':
-            # print('上映时间：',stag.parent.text.strip().split(' ')[-1])
             film_datetime = stag.parent.text.strip().split(' ')[-1]
-
-            # print(film_name,film_type,film_datetime)
             film = [film_name, film_type, film_datetime]
-            # print(film)
             films.append(film)
         if len(films) >= 10:
             break
-# print(films, len(films))
 
 movie = pd.DataFrame(data=films)
 

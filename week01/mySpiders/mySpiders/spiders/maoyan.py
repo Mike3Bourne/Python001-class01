@@ -28,10 +28,9 @@ class MaoyanSpider(scrapy.Spider):
 
     def start_requests(self):
         # 获取是个电影的信息，无需翻页，所以暂时不使用for in 迭代
-        # header = {}
         cookies = {'__mta': '19125639.1593093704429.1593223600946.1593272111104.19', 'uuid_n_v': 'v1', 'uuid': '66032280B6EC11EA96060F060440817E0CD6588F264341F6BAE592A978223E64', '_lxsdk_cuid': '172ebc8c872c8-06fb8d7d972ad3-4353760-100200-172ebc8c873c8', '_lxsdk': '66032280B6EC11EA96060F060440817E0CD6588F264341F6BAE592A978223E64', 'mojo-uuid': 'e1772807c81f11b610e103c16996314e',
                    '_csrf': '0fce7216759568c83b3097bf466cb9105aae2480e9248fcdd8c9a1c941c54800', 'Hm_lvt_703e94591e87be68cc8da0da7cbd0be2': '1593174407,1593175457,1593187363,1593223570', 'mojo-session-id': '{"id":"38f0e36fe7f72e41d683cef66a682575","time":1593271559357}', 'Hm_lpvt_703e94591e87be68cc8da0da7cbd0be2': '1593272111', 'mojo-trace-id': '8', '_lxsdk_s': '172f662a543-dca-5d6-18b%7C%7C11'}
-        # header['cookie'] = cookies
+        
         url = 'http://maoyan.com/films?showType=3&sortId=1'
         yield scrapy.Request(url=url, cookies=cookies, callback=self.parse)
 

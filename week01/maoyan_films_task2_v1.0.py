@@ -36,7 +36,6 @@ payload = {'showType': 3, 'sortId': 1}
 # 获取猫眼电影列表页面的响应内容并解析
 response = requests.get(maoyan_films_url, headers=header, params=payload)
 selector = etree.HTML(response.text)
-# print(type(response.text),type(selector))
 # 获取猫眼电影列表页面的所有电影详情页面连接
 
 url_path = '//dd/div[1]/a/@href'  # 从浏览器调试工具中获取相对路径
@@ -48,20 +47,10 @@ full_urls = list(map(lambda x: maoyan_domain + x, film_urls))
 
 
 def get_detail_info(sel):
-    # film =[]
     film_name = ''.join(sel.xpath('//h1[@class="name"]/text()'))
-    # print("film_name_type:",type(film_name),film_name)
-    # print(f'电影名称：{film_name}')
-    film_type = ''.join(
-        sel.xpath('//div[@class="movie-brief-container"]/ul/li[1]/*/text()'))
-    # print("film_type_type:",type(film_type),film_type)
-    # print(f'电影类型: {film_type}')
-    film_date = ''.join(
-        sel.xpath('//div[@class="movie-brief-container"]/ul/li[3]/text()'))[:10]
-    # print("film_date_type:",type(film_date),film_date)
-    # print(f'电影上映时间: {film_date}')
+    film_type = ''.join(sel.xpath('//div[@class="movie-brief-container"]/ul/li[1]/*/text()'))
+    film_date = ''.join(sel.xpath('//div[@class="movie-brief-container"]/ul/li[3]/text()'))[:10]
     film = [film_name, film_type, film_date]
-    # print(film)
     return film
 
 
@@ -71,12 +60,8 @@ for ful_url in full_urls[:9]:
     # 请求每个电影对应的详情页面，并进行xml处理
     res = requests.get(ful_url, headers=header, params=payload)
     selector_detail = etree.HTML(res.text)
-    # print(type(selector_detail))
     detail_info = get_detail_info(selector_detail)
-    # print(type(detail_info), detail_info)
     film_info.append(detail_info)
-    # print(type(film_info), film_info)
-    # break
     sleep(1)
 print(film_info)
 
