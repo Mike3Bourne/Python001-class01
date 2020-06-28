@@ -7,7 +7,6 @@ from lxml import etree
 from mySpiders.items import MyspidersItem
 
 
-
 class MaoyanSpider(scrapy.Spider):
     name = 'maoyan_2'
     allowed_domains = ['maoyan.com']
